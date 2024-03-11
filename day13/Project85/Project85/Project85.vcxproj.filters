@@ -15,18 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="0308 after test.cpp">
-      <Filter>소스 파일</Filter>
-    </None>
-    <None Include="ccc.cpp">
-      <Filter>소스 파일</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="aaa.cpp">
+    <ClCompile Include="mainTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="bv.cpp">
+    <ClCompile Include="001.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="vectorTest.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

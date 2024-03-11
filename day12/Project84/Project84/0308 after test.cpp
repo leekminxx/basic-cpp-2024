@@ -47,6 +47,7 @@ public:
 	void Showinfo() const override {
 		cout << "Book - ID: " << id << ", Price " << price << ", Producer:" << producer << "ISBN" << ISBN << ", Author" << author << ", Title" << title << endl;
 	}
+	getid()
 };
 
 class Handphone : public Product {
@@ -75,6 +76,19 @@ public:
 		cout << "Computer-ID :" << id << ",Price" << price << ", Producer" << producer << ", Model" << model << ", CPU " << CPU << ", RAM" << RAM << "(gbyte)" << endl;
 	}
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main(void) {
 	const int A_PRODUCTS = 100;

@@ -2,67 +2,194 @@
 IoT 시스템개발자 심화 프로그래밍 언어 학습리포지토리
 
 ## 1일차
+- - -
 - 개발환경 설치
 	- Visual Studio 2022 Community 설치
-	- C, C++ 소스코드 실행
-	- C++에 대해 설명
+
+> 함수 정의의 구성 요소 및 주요 포인트
+	>> 반환 타입(Return Type):함수가 반환하는 값의 데이터 타입을 지정 반환값이 없는 경우 'void' 사용
+	>> 함수 이름(Function Name):함수를 호출할 때 사용하는 이름 
+	>> 매개변수 목록(Parameter List): 함수가 입력으로 받을 수 있는 값 , 각 매개변수는 타입과 이름으로 구성 **매개변수가 없는동안 '( )' 사용**
+	>> 함수 몸체(Function Body): 중괄호' {} ' 안에 함수가 수행할 작업을 정의 변수 선언 , 제어문 , 기타 함수 호출
+
+<detaiuls>
+<suummary>반환 값이 없는 함수(void)</summary>
+	<b>
+	```c
+	void sayHello() {
+    std::cout << "Hello, World!" << std::endl;}
+	// 'Hello , World' 를 출력하고 , 마우런 값을 반환하지 않음
+	```
+	</b>
+</detaiuls>
+	
+
+- 매개변수가 있는 함수
+	```c
+	void printNumber(int num) {
+    std::cout << "The number is: " << num << std::endl;}
+	// 이 함수는 정수 'num'을 입력으로 받아서 출력
+	```
+
+- 반환 값이 있는 함수 
+	```c
+	int add(int a, int b) {
+    return a + b;}
+	// 두 개의 정수 'a' 와 'b' 를 입력으로 받아 그 합을 반환 
+	```
 
 - 제어문
-	1. 선택제어문 
-		- if, switch
-		- if, else 문(C언어종류) / elif = Python
-		- 반복문 For
-		- 반복문 While
-		- Overloading(재정의), Overriding
+	- 선택 제어문 요약
+		- if 문: 조건이 참일 때 코드를 실행.
+		- else 문: if 문의 조건이 거짓일 때 코드를 실행.
+		- else if 문: 여러 조건을 순차적으로 검사.
+		- switch 문: 하나의 변수 값에 따라 여러 경로 중 하나를 선택. | 'case' 키워드를 사용하여서 각 경로를 정의하고 , 'break' 키워드로 각 경로를 종료
 		
-	2. 반복제어문 
-		- for,while
-		- for(초기식; 조건식; 증감식){ (a->b->c->d->b->c->d->b->c->d->...)
-			- a. 초기식을 가지고 조건식을 따진다. 
-			- b. 참이면 for문의 실행문 실행
-			- c. 증감식을 실행
-			- d. 조건식을 따지고
-			- b.
-			- c.
-			- d.
-			- b.
-			- c.
-			- d.
-			.
-			.
-			.
-		}
-
+	- 반복 제어문 | 중첩 반복문[반복문 안에 또 다른 반복문 사용] (반복 제어문을 사용하면 코드의 재사용성과 가독성을 높일 수 있으며, 반복적인 작업을 간결하게 처리할 수 있음)
+		- for 반복문: 반복 횟수가 정해진 경우 사용.
+		- while 반복문: 조건이 참인 동안 반복. 조건을 처음에 검사.
+		- do-while 반복문: 조건이 참인 동안 반복. 최소 한 번은 실행.
 	
-- 지역변수 = 로컬변수
-	1. 선언되어진 범위 안에서만 사용이 가능(static 영역에 저장)
-
-- 자료형
-	1. 문자 : 문자(char),문자열
-	2. 숫자 : 정수(int),실수
-	
-- 정수로 계산하기
-	
-
-
+- 지역변수 = 로컬변수 
+	1. 선언되어진 범위 안에서만 사용이 가능(static 영역에 저장) 해당 블록이 종료되면 소멸합니다.
+	```c
+	#include <iostream>
+	int main() {
+		int num = 10; // num은 main 함수 내에서만 유효한 지역 변수
+		std::cout << "Value of num: " << num << std::endl;
+		return 0;
+	} // 'num' 변수는 'main' 함수 내에서 선언된 지역 변수 main 함수가 끝나면 num변수는 더이상 유효하지 않음
+	```
 
 ## 2일차
-// class 안에 들어 가는 함수 = Method
+<p>C ++ 의 중요한 개념들로 클래스 내부의 메소드 , 기본값을 가지는 함수 , 참조를 사용하는 함수 , 네임스페이스 , 전역변수와 , 지역변수 C에서의 메모리 관리 , 비트 AND 연산자와 논리 AND 연산자에 대해 정리하고 
+지금까지의 내용은 프로그래밍에서 필수적이고 효율적인 코드 작성을 위해 잘 이해하고 활용하는것이 중요!!</p>
 
-- Default Value
-- Reference 함수
-	- 반환형 Reference Type
+- class 안에 들어 가는 함수 = Method
+	```c
+	class MyClass {
+	public:
+    	void myMethod() {
+        	std::cout << "This is a method." << std::endl;
+    	}
+	};
+	// 클래스 내부에 정의된 함수를 메소드 라고 하고 메소드는 클래스의 인스턴스와 연관된 동작을 정의
+	```
+
+- Default 
+	```c
+	void printMessage(std::string message = "Hello, World!") {
+    std::cout << message << std::endl;
+	}
+
+	int main() {
+		printMessage(); // 기본값인 "Hello, World!" 출력
+		printMessage("Custom Message"); // "Custom Message" 출력
+		return 0;
+	}
+	// C++ 에서는 함수의 매개변수에 기본값을 지정할 수 있는데 기본값이 지정된 매개변수는 함수 호출시 생략이 가능하고 생략된 경우에는 기본값이 사용됨
+	```
+- ❗Reference 함수
+	- 장점
+	- 단점 
+	```c
+	void modifyValue(int& x) {
+	x = 20;
+	}
+
+	int main() {
+		int num = 10;
+		modifyValue(num);
+		std::cout << "Modified value: " << num << std::endl; // 20 출력
+		return 0;
+	}
+	// main 함수에서 'num' 변수를 선언하고 초기값을 10으로 설정 
+	// modifyValue(num);를 호출하면 num 변수의 참조가 modifyValue 함수에 전달
+	// 함수 내에서 x는 num 변수를 참조하고 있으므로, x = 20;는 곧 num = 20;과 동일한 효과를 가지고있음
+	// 따라서, 함수 호출 이후 num 변수의 값은 20으로 변경
+	// std::cout << "Modified value: " << num << std::endl;는 num의 새로운 값을 출력하며, 결과는 20
+	```
+
+- ❗반환형 Reference Type
+	> 반환형이
+		>> 반환형이 참조 타입인 함수는 함수가 호출된 후에도 반환된 값이 데이터에 대한 참조로 유지
+		>> 변수의 복사본을 반환하는 대신 , 원본 변수에 직접 접근할 수 있게 함
+	```c
+	int& returnReference(int& x) { // int& returnReference(int& x)는 반환형과 매개변수 모두 참조 타입
+    return x;   //return x;는 입력된 x를 반환합니다. 여기서 x는 참조 타입이므로, 반환된 x는 원본 변수를 참조
+	}
+	```
+	```c
+	#include <iostream>
+
+	int& returnReference(int& x) {
+		return x;
+	}
+
+	int main() {
+		int num = 10;
+		int& ref = returnReference(num); // ref는 num을 참조
+
+		std::cout << "Original value: " << num << std::endl; // 10 출력
+		ref = 20; // ref를 통해 num의 값을 변경
+		std::cout << "Modified value: " << num << std::endl; // 20 출력
+
+		return 0;
+	}
+	```
+
+
+
+
 - Name Space
+	- 이름충돌을 방지하기 위해서 사용됨 
+	```c
+	namespace MyNamespace {
+    int value = 100;
+    void display() {
+        std::cout << "Namespace function" << std::endl;
+    }
+	}
+
+	int main() {
+		MyNamespace::display();
+		std::cout << "Namespace value: " << MyNamespace::value << std::endl;
+		return 0;
+	}
+	```
 - 전역,지역변수
-- C에서 메모리
-	- 스택 : 지역변수, 매개변수
-	- HEAP : 사용자에게 할당된 영역
+	- 전역 변수: 모든 함수에서 접근 가능하며, 프로그램 시작부터 종료까지 존재.
+	- 지역 변수: 선언된 함수나 블록 내에서만 접근 가능하며, 해당 블록이 종료되면 소멸
+	```c
+	int globalVar = 10; // 전역 변수
+
+	int main() {
+		int localVar = 20; // 지역 변수
+		std::cout << "Global: " << globalVar << ", Local: " << localVar << std::endl;
+		return 0;
+	}
+	```
+- C에서 메모리 관리 (화이팅 ㅎㅅㅎ 깃 정리 하는고야? 나중에 나도 알려조 ㅎㅅㅎ)
+	- 스택 : 지역 변수와 매개변수가 저장되는 영역.
+	- HEAP : 사용자에게 동적으로 할당되는 메모리 영역. malloc()으로 할당받고, free()로 해제
 		= Malloc() -> free()반환 = 사용을 할려면 Malloc으로 할당을 받는다
-	- data: 함수, 전역변수, 상수, 문자 리터럴
+	- data 영역: 전역 변수, 정적 변수, 상수, 문자 리터럴이 저장되는 영역.
 	
 	- // A & B = 비트 And 연산자
+	```c
+	int A = 5; // 0101
+	int B = 3; // 0011
+	int result = A & B; // 0001
+	// 둘다 참인값이여야 1을 출력하는데 A,B 둘다 0의 값이 아닌 1이기 때문에 둘다 참 즉 result 는 참
+	```
 	- // A && B = 논리 And 연산자 = 논리 곱
+
+
+
+
 		
+
+
 
 
 ## 3일차

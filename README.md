@@ -522,19 +522,18 @@ IoT 시스템개발자 심화 프로그래밍 언어 학습리포지토리
 > 클래스의 정적 멤버는 클래스 자체에 속하며 , 모든 객체가 이를 공유함
 
 > 정적 멤버 함수는 객체를 생성하지 않고도 호출할 수 있음
-	```C++
-	class Example {
-	public:
-		static int staticVar;
-		static void staticFunc() {
-			// 정적 멤버 함수
-		}
-	};
+		```C++
+			class Example {
+			public:
+				static int staticVar;
+				static void staticFunc() {
+					// 정적 멤버 함수
+				}
+			};
+			int Example::staticVar = 0; // 정적 멤버 변수 초기화
 
-	int Example::staticVar = 0; // 정적 멤버 변수 초기화
-
-	Example::staticFunc(); // 객체 없이 호출 가능
-	```
+			Example::staticFunc(); // 객체 없이 호출 가능
+		```
 
 ## 7일차
 ```c++

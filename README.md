@@ -535,33 +535,127 @@ IoT 시스템개발자 심화 프로그래밍 언어 학습리포지토리
 		Example::staticFunc(); // 객체 없이 호출 가능
 	```
 
+
+
+
+
 ## 7일차
-```c++
-Person class
-	char *name; // 이름을 저장하는 동적 할당된 문자열 포인터
-	int age; // 나이를 저장하는 정수
+- Person 클래스 코드 
+	> Person 클래스는 이름을 저장하는 동적 할당된 문자열 포인터와 나이를 저장하는 정수 필드를 가짐 
 
-int main()
-{
-    Person p("Hong", 30); // "Hong" 문자열을 가지고 30이라는 나이로 Person 객체 생성
-    p.personInfo(); // Person 객체의 정보 출력
+	> 이 클래스는 생성자 , 복사생성자 , 소멸자 , 객체정보를 출력하는 메서드를 포함
+	```c++
+	Person class
+		char *name; // 이름을 저장하는 동적 할당된 문자열 포인터
+		int age; // 나이를 저장하는 정수
 
-    Person copyp(p); // p 객체를 복사하여 새로운 객체 copyp 생성
-    copyp.personInfo(); // 복사된 객체 copyp의 정보 출력
+	int main()
+	{
+		Person p("Hong", 30); // "Hong" 문자열을 가지고 30이라는 나이로 Person 객체 생성
+		p.personInfo(); // Person 객체의 정보 출력
 
-    return 0;
-}
+		Person copyp(p); // p 객체를 복사하여 새로운 객체 copyp 생성
+		copyp.personInfo(); // 복사된 객체 copyp의 정보 출력
+
+		return 0;
+	}
 	```
 	
-		- name 필드는 힙영역에 메모리를 할당하여 저장
-		- 자기 객체를 생성하고 객체 복사를 하시오
-
 - 상속(INHERITANCE)
-	- 문법적 이해
-	- 유도클래스의 객체생성 과정
+	> 상속은 기존 클래스(부모) 의 특성을 새로운 클래스(자식)가 물려받아 재사용하고 확장하는 개념 상속을 통해 코드 재사용성과 유지보수성을 높일 수 있음
 
-- Protected 선언과 세가지 형태의 상속
+	> 기본 클래스(Base Class) 와 유도 클래스 (Derived Class)
+	>> 기본 클래스 : 다른 클래스에 의해 상속될 수 있는 클래스 
+	>> 유도 클래스 : 기본 클래스를 상속받아 만들어진 클래스
+	- 문법적 이해
+	> 기본 클래스의 멤버들은 'public' , 'protected', 'private' 로 접근 제한자가 설정될 수 있음
+
+	> 상속은 'public' , 'protected', 'private' 키워드를 사용하여 상속 방식과 접근 범위를 정의
+	```C++
+	class Base {
+	public:
+		int publicVar;
+	protected:
+		int protectedVar;
+	private:
+		int privateVar;
+	};
+
+	class Derived : public Base {
+		// Base의 public 및 protected 멤버들은 Derived의 public 및 protected 멤버가 됨
+		// Base의 private 멤버들은 Derived에서 접근할 수 없음
+	};
+	```
+	- 유도클래스의 객체생성 과정
+	> 유도 클래스의 객체를 생성할 때는 다음과 같은 단계가 수행됨
 	
+	> 기본 클래스의 생성자 호출 : 유도 클래스의 생성자가 호출되기 전에 기본 클래스의 생성자가 먼저 호출됨 기본클래스의 생성자가 여러 개 있는 경우 , 유도 클래스의 생성자에서 특정 생성자를 명시적으로 호출할 수 있음
+
+	> 유도 클래스의 생성자 호출 : 기본 클래스의 생성자가 호출된 후 , 유도 클래스의 생성자가 호출 됨
+	```C++
+		class Base {
+	public:
+		Base() {
+			std::cout << "Base Constructor" << std::endl;
+		}
+	};
+
+	class Derived : public Base {
+	public:
+		Derived() {
+			std::cout << "Derived Constructor" << std::endl;
+		}
+	};
+
+	int main() {
+		Derived d;
+		return 0;
+	}
+	```
+- Protected 선언과 세가지 형태의 상속
+	> Protected 선언 : 'protected' 멤버는 기본 클래스와 유도 클래스 내에서 접근할 수 있지만 , 외부에서는 접근할 수 없음
+	```C++
+	class Base {
+	protected:
+		int protectedVar;
+	};
+
+	class Derived : public Base {
+	public:
+		void accessProtectedVar() {
+			protectedVar = 10; // 유도 클래스에서 접근 가능
+		}
+	};
+	```
+- ❗❗❗상속의 세 가지 형태
+	- Public 상속
+	> 기본 클래스의 'public' 멤버는 유도 클래스의 'public' 멤버가 됨
+
+	> 기본 클래스의 'protected' 멤버는 유도 클래스의 'protected' 멤버가 됨
+
+	> 기본 클래스의 'private' 멤버는 유도 클래스에서 접근 할 수 없음
+	```C++
+	class Derived : public Base {
+    // Base의 public 멤버 -> Derived의 public 멤버
+    // Base의 protected 멤버 -> Derived의 protected 멤버
+    // Base의 private 멤버 -> 접근 불가
+	};
+	```
+	
+	- Protected 상속
+	> 기본 클래스의 'public' 멤버는 유도 클래스의 'protected' 멤버가 됨
+
+	> 기본 클래스의 'protected' 멤버는 유도 클래스의 'protected' 멤버가 됨
+
+	> 기본 클래스의 'private' 멤버는 유도 클래스에서 접근할 수 없음
+	```C++
+	class Derived : protected Base {
+    // Base의 public 멤버 -> Derived의 protected 멤버
+    // Base의 protected 멤버 -> Derived의 protected 멤버
+    // Base의 private 멤버 -> 접근 불가
+	};
+	```
+
 ## 8일차
 -객체 포인터의 참조관계
 	- 오버로딩(Overloading) - 다중정의

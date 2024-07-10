@@ -249,7 +249,7 @@ IoT 시스템개발자 심화 프로그래밍 언어 학습리포지토리
 
 		> Private : 비공개 멤버 , 클래스 내부에서만 접근할 수 있으며 , 파생 클래스에서도 접근할 수 없음
 	
-![접근제어 이미지](https://github.com/leekminxx/basic-cpp-2024/blob/main/cpp1.png)
+![접근제어 이미지](https://raw.githubusercontent.com/leekminxx/basic-cpp-2024/main/img/CPP01.PNG)
 
 ## 4일차
 ### 클래스(Class) 와 객체(Object)

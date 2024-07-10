@@ -378,24 +378,163 @@ IoT 시스템개발자 심화 프로그래밍 언어 학습리포지토리
 > 복사 생성자, 디폴트 생성자
 
 ## 6일차
-- 깊은 복사와 얕은 복사
+- 김픈 복사와 얕은 복사
+	- 얕은 복사
+		> 객체의 필드 값을 그대로 복사하는 방식
+		
+		> 객체가 참조하는 메모리 주소만 복사
+		
+		> 복사된 객체와 원본 객체는 같은 메모리 주소를 가리킴
+	```C++
+	class Example {
+	public:
+		int* data;
+		Example(int value) {
+			data = new int(value);
+		}
+	};
+
+	Example a(10);
+	Example b = a; // 얕은 복사
+	```
+	- 깊은 복사
+		> 객체가 소유한 모든 자원을 복사 
+		
+		> 객체가 참조하는 데이터도 별도로 복사
+
+		> 복사된 객체는 원본 객체와 독립된 메모리 주소를 가짐
+	```C++
+		class Example {
+	public:
+		int* data;
+		Example(int value) {
+			data = new int(value);
+		}
+		Example(const Example& other) { // 깊은 복사 생성자
+			data = new int(*other.data);
+		}
+	};
+
+	Example a(10);
+	Example b = a; // 깊은 복사
+	```
 - 복사 생성자의 호출 시점
 	1. 기존에 생성된 객체 => 새로운 객체를 초기화
+	```c++
+	Example a(10);
+	Example b = a; // 복사 생성자 호출
+	```
 	2. Call-By-Value 방식의 함수호출 과정에서 객체를 인자로 전달
+	```c++
+		void func(Example e) {
+		// ...
+	}
+
+	Example a(10);
+	func(a); // 복사 생성자 호출
+	```
 	3. 객체를 반환 -> 참조형으로는 반환 X
-	
+	```c++
+		Example createExample() {
+		Example e(10);
+		return e; // 복사 생성자 호출
+	}
+
+	Example a = createExample();
+	```
 - Return Object Dead Time
+	> 반한된 객체가 사용될 수 있는 마지막 시점
+	
+	> C++ 에서는 객체의 수명이 블록을 벗어날 때 끝나므로 , 반환된 객체는 복사되거나 이동되어 새로운 수명을 부여받는다.
 
 - friend
+	> friend 키워드를 사용하여 클래스 외부의 함수나 다른 클래스가 해당 클래스의 비공개 멤버에 접근할 수 있도록 함
+	```C++
+		class Example {
+		int privateVar;
+	public:
+		Example(int value) : privateVar(value) {}
+		friend void accessPrivateVar(Example&);
+	};
 
+	void accessPrivateVar(Example& e) {
+		e.privateVar = 20; // private 멤버에 접근 가능
+	}
+	```
 - static
+	> Static 키워드는 클래스 멤버 변수와 함수에 사용되어 클래스의 모든 객체가 공유하는 정적멤버를 정의한다.
+	```C++
+	class Example {
+	public:
+		static int staticVar;
+		static void staticFunc() {
+			// ...
+		}
+	};
 
+	int Example::staticVar = 0; // 정적 멤버 변수 초기화
+	```
 - const
 	1. 객체와 객체의 특성들
-	2. 함수 오버 로딩
-	3. 함수의 Friend 선언
+	> 'const' 객체는 객체의 데이터를 변경할 수 없음
 
+	> 멤버 변수 앞에 'const' 를 붙이면 , 그 함수는 객체의 데이터를 변경할 수 없음
+	```C++
+		class Example {
+	public:
+		void func() const {
+			// 멤버 데이터를 변경할 수 없음
+		}
+	};
+
+	const Example e;
+	e.func(); // const 함수 호출 가능
+	```
+	2. 함수 오버 로딩
+	> 'const' 와 'non-const' 함수는 서로 다른 함수로 간주되어 오버로딩 할 수 있음
+	```C++
+		class Example {
+	public:
+		void func() {
+			// non-const 함수
+		}
+		void func() const {
+			// const 함수
+		}
+	};
+	```
+	3. 함수의 Friend 선언
+	> 'const' 객체를 함수의 인자로 받을 수 있도록 'const' 를 사용함
+	```C++
+	class Example {
+		int privateVar;
+	public:
+		Example(int value) : privateVar(value) {}
+		friend void accessPrivateVar(const Example&);
+	};
+
+	void accessPrivateVar(const Example& e) {
+		// e.privateVar 접근 가능, but 변경 불가
+	}
+	```
+- - -
 - C++ 에서의 Static
+> 클래스의 정적 멤버는 클래스 자체에 속하며 , 모든 객체가 이를 공유함
+
+> 정적 멤버 함수는 객체를 생성하지 않고도 호출할 수 있음
+	```C++
+	class Example {
+	public:
+		static int staticVar;
+		static void staticFunc() {
+			// 정적 멤버 함수
+		}
+	};
+
+	int Example::staticVar = 0; // 정적 멤버 변수 초기화
+
+	Example::staticFunc(); // 객체 없이 호출 가능
+	```
 
 ## 7일차
 ```c++
